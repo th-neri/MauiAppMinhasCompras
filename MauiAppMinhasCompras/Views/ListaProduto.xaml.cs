@@ -1,4 +1,3 @@
-
 using MauiAppMinhasCompras.Models;
 using System.Collections.ObjectModel;
 
@@ -27,15 +26,15 @@ public partial class ListaProduto : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Ops", ex.Message, "Ok");
+            await DisplayAlert("Ops", ex.Message, "OK");
         }
     }
+
     private void ToolbarItem_Clicked(object sender, EventArgs e)
     {
         try
         {
             Navigation.PushAsync(new Views.NovoProduto());
-
 
         }
         catch (Exception ex)
@@ -48,7 +47,6 @@ public partial class ListaProduto : ContentPage
     {
         try
         {
-
             string q = e.NewTextValue;
 
             lst_produtos.IsRefreshing = true;
@@ -68,6 +66,7 @@ public partial class ListaProduto : ContentPage
             lst_produtos.IsRefreshing = false;
         }
     }
+
     private void ToolbarItem_Clicked_1(object sender, EventArgs e)
     {
         double soma = lista.Sum(i => i.Total);
@@ -81,11 +80,12 @@ public partial class ListaProduto : ContentPage
     {
         try
         {
-            MenuItem selecionado = sender as MenuItem;
+            MenuItem selecinado = sender as MenuItem;
 
-            Produto p = selecionado.BindingContext as Produto;
+            Produto p = selecinado.BindingContext as Produto;
 
-            bool confirm = await DisplayAlert("Tem certeza ?", "Remover produto ?", "Sim", "Não");
+            bool confirm = await DisplayAlert(
+                "Tem Certeza?", $"Remover {p.Descricao}?", "Sim", "Não");
 
             if (confirm)
             {
@@ -128,11 +128,24 @@ public partial class ListaProduto : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Ops", ex.Message, "Ok");
+            await DisplayAlert("Ops", ex.Message, "OK");
+
         }
         finally
         {
             lst_produtos.IsRefreshing = false;
+        }
+    }
+
+    private void ToolbarItem_Clicked_2(object sender, EventArgs e)
+    {
+        try
+        {
+            Navigation.PushAsync(new Views.Gastos());
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Ops", ex.Message, "OK");
         }
     }
 }
